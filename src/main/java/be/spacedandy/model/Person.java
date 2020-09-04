@@ -2,6 +2,7 @@ package be.spacedandy.model;
 
 import be.spacedandy.data.Gender;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Person {
@@ -13,7 +14,9 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Course course;
+    private Course courseActive;
+    @ManyToMany
+    private List<Course> courseHistory;
 
     public Integer getId() {
         return id;
@@ -47,11 +50,19 @@ public class Person {
         this.gender = gender;
     }
 
-    public Course getCourse() {
-        return course;
+    public Course getCourseActive() {
+        return courseActive;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseActive(Course courseActive) {
+        this.courseActive = courseActive;
+    }
+
+    public List<Course> getCourseHistory() {
+        return courseHistory;
+    }
+
+    public void setCourseHistory(List<Course> courseHistory) {
+        this.courseHistory = courseHistory;
     }
 }

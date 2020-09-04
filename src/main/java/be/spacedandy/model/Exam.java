@@ -2,6 +2,7 @@ package be.spacedandy.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 public class Exam {
@@ -16,6 +17,9 @@ public class Exam {
     private int total;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Module module;
+    private Exam examGroup;
+    @OneToMany(mappedBy = "examGroup")
+    private List<Exam> subExams;
 
     public long getId() {
         return id;
@@ -71,5 +75,21 @@ public class Exam {
 
     public void setModule(Module module) {
         this.module = module;
+    }
+
+    public Exam getExamGroup() {
+        return examGroup;
+    }
+
+    public void setExamGroup(Exam examGroup) {
+        this.examGroup = examGroup;
+    }
+
+    public List<Exam> getSubExams() {
+        return subExams;
+    }
+
+    public void setSubExams(List<Exam> subExams) {
+        this.subExams = subExams;
     }
 }
