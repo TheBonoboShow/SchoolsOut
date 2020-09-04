@@ -9,7 +9,7 @@ public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Person person;
     @ManyToOne
     private Exam exam;

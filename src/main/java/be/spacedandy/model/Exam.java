@@ -18,8 +18,11 @@ public class Exam {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Module module;
     private Exam examGroup;
-    @OneToMany(mappedBy = "examGroup")
+    @OneToMany(mappedBy = "examGroup", fetch = FetchType.EAGER)
     private List<Exam> subExams;
+    @Transient
+    @OneToMany(mappedBy = "exam")
+    private List<Grade> grades;
 
     public long getId() {
         return id;
@@ -91,5 +94,29 @@ public class Exam {
 
     public void setSubExams(List<Exam> subExams) {
         this.subExams = subExams;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", weight=" + weight +
+                ", total=" + total +
+                ", module=" + module +
+                ", examGroup=" + examGroup +
+                ", subExams=" + subExams +
+                ", grades=" + grades +
+                '}';
     }
 }
